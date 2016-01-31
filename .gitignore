@@ -60,3 +60,6 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#project files to be ignored
+unwind/local_settings.py
