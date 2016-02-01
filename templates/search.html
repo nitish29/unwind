@@ -1,0 +1,182 @@
+{% extends 'base.html' %} {% block body_block %}
+<!-- Start of Page Container -->
+<script>
+function populate_search(){
+        document.getElementById('s').value="{{query}}";
+    }
+</script>
+<div class="page-container" >
+    <div class="container">
+        <div class="row">
+        {% ifequal search_type|slugify "normal" %}
+        {{total_results}} results found
+        {% endifequal %}
+        </div>
+        <div class="row">
+            <!-- start of page content -->
+            <div class="span8 main-listing">
+                {% for i in data %}
+                <article class="format-standard type-post hentry clearfix">
+                    <header class="clearfix">
+                        <div class="row">
+                            <div class="span1 span_image_padding">
+                                <img src="{{i.user_profile_image_url}}">
+                            </div>
+                            <div class="span7 span_custom_tweet">
+                                <h4 class="h4_custom_margin"><a href="https://twitter.com/{{i.screen_name}}" target="_blank">{{i.username}}</a></h4>
+                                <p><a href="https://twitter.com/{{i.screen_name}}/status/{{i.id}}" target="_blank">{{i.text}}</a></p>
+                            </div>
+                            <!-- <img src="{{i.user_profile_image_url}}"> 
+                                                <h4>
+                                                        <a href="https://twitter.com/{{i.screen_name}}">{{i.username}}</a>
+                                                </h4> -->
+                            <div class="row">
+                                <div class="span1"></div>
+                                <div class="span7">
+                                    <div class="post-meta clearfix">
+                                        <span class="date">{{i.created_at}}</span>
+                                        {% for j in i.tweet_topics %}
+                                        <span class="category"><a href="?q={{query}}&page_no={{next_page}}&topic={{j}}" title="View all posts in Server &amp; Database">
+                                        {% ifequal j|slugify 0|slugify %} Impact on Presidential Race {% endifequal %}
+                                        {% ifequal j|slugify 1|slugify %} Syria {% endifequal %}
+                                        {% ifequal j|slugify 2|slugify %} Paris Attacks {% endifequal %}
+                                        {% ifequal j|slugify 3|slugify %} Paris Attack Suspects {% endifequal %}
+                                        {% ifequal j|slugify 4|slugify %} Paris Attacks Aftermath {% endifequal %}
+                                        {% ifequal j|slugify 5|slugify %} West {% endifequal %}
+                                        {% ifequal j|slugify 6|slugify %} Paris attack Concert {% endifequal %}
+                                        {% ifequal j|slugify 7|slugify %} Influence on attacks on the US {% endifequal %}
+                                        {% ifequal j|slugify 8|slugify %} Paris and UK Connection {% endifequal %}
+                                        {% ifequal j|slugify 9|slugify %} Refugees {% endifequal %}
+                                        </a></span>
+                                        {% endfor %}
+                                        <!-- <span class="comments"><a href="#" title="Comment on Integrating WordPress with Your Website">3 Comments</a></span> -->
+                                        <span class="like-count">{{i.favourite_count}}</span>
+                                        <span style="float:right;"><i class="icon-retweet" ></i>&nbsp;{{i.retweet_count}}</span>
+                                    </div>
+                                    <!-- end of post meta -->
+                                </div>
+                            </div>
+                            <!-- <p>{{i.text}}</p> -->
+                    </header>
+                </article>
+                {% endfor %}
+                <div id="pagination">
+                
+                {% for j in loop_times|slice:":10" %}
+                
+                    <a href="?{{enc_query}}&page_no={{j}}&topic={{topic}}" class="btn {% ifequal j|slugify page_no %}active{% endifequal %}">{{j}}</a>
+
+                {% endfor %}
+                {% ifnotequal num_pages|slugify page_no|slugify %}
+                <a href="?{{enc_query}}&page_no={{next_page}}&topic={{topic}}" class="btn">Next »</a>
+                <a href="?{{enc_query}}&page_no={{num_pages}}&topic={{topic}}" class="btn">Last »</a>
+                {% endifnotequal %}
+                </div>
+                
+            </div>
+                <!-- end of page content -->
+                <!-- start of sidebar -->
+            <aside class="span4 page-sidebar">
+            {% ifequal search_type|slugify "normal" %}
+
+                <section class="widget">
+                   <h3>Trending Hashtags</h3>
+                    {% for j in hashtag|slice:":10" %}
+                    {% if forloop.counter|divisibleby:"2" %}
+                    {% else %}
+                    #{{j}}<br>
+                    {%endif%}
+
+                    {% endfor %}
+                </section>
+
+                <section class="widget">
+                    <h3 class="title pie_chart_margin">Languages</h3>
+                    <div id="piechart"></div>
+                </section>
+                {% endifequal %}
+            </aside>
+                <!-- end of sidebar -->
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+    function reverseString(str) {
+        var temp = '';
+        var i = str.length;
+
+        while (i > 0) {
+            temp += str.substring(i - 1, i);
+            i--;
+        }
+
+
+        return temp;
+    }
+
+    function displaySuggestion(str) {
+        //console.log(str);
+        var old_val = document.getElementById('s').value;
+        var temp = "\0" + old_val;
+        //alert(temp);
+        var flag = 0;
+        var new_str = "";
+        for (var i = temp.length; temp.charAt(i) != '\0'; i--) {
+            //console.log(temp.charAt(i));
+            if (flag == 0) {
+                if (temp.charAt(i) == ' ') {
+                    flag = 1;
+                }
+            } else {
+                new_str = new_str + temp.charAt(i);
+            }
+        }
+        new_str = new_str.substring(0, new_str.length);
+        /*alert(new_str);*/
+        document.getElementById('s').value = reverseString(new_str) + " " + str + " ";
+        document.getElementById('s').focus();
+        //$('#jquery-live-search').hide().slideUp();
+    }
+    </script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load("visualization", "1", {
+        packages: ["corechart"]
+    });
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Language', 'Percentage'],
+            ['English', {{lang_cnt.en}}],
+            ['German', {{lang_cnt.de}}],
+            ['French', {{lang_cnt.fr}}],
+            ['Spanish', {{lang_cnt.es}}]
+        ]);
+
+        var options = {
+            title: '',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+    document.getElementById('piechart').onclick = function(rowIndex) {
+        console.log(rowIndex);
+        console.log("helloo");
+        this.highlightRow(this.selectedRow, false); // Clear previous selection
+        this.highlightRow(rowIndex, true); // Highlight new selection
+
+        // Save the selected row index in case getSelection is called.
+        this.selectedRow = rowIndex;
+        
+        // Fire a select event.
+        google.visualization.events.trigger(this, 'select', {});
+    };
+
+    
+    </script>
+    <!-- End of Page Container -->
+    {% endblock %}
