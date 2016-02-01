@@ -87,13 +87,14 @@ def search(request):
 
 		category_id_list = request.GET.getlist('category_id')
 		category_string = ', '.join(category_id_list)
+		#query_string = ', '.join(category_id_list)
 
 		data_fetched_from_api = fetchEventbriteEvents(category_string)
 		
 		if data_fetched_from_api['status'] == "success":
 
 			events = data_fetched_from_api['data']['events']
-			page_count = data_fetched_from_api['data']['page_count']
+			page_count = data_fetched_from_api['data']['pagination']['page_count']
 			
 
 		else:

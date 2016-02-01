@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block body_block %}
+<!-- Start of Page Container -->
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+            <!-- start of page content -->
+            <div class="span12 page-content">
+
+                {% if errors %}
+                        {% for i in errors %}
+                                <h3>{{ i }}</h3>
+                        {% endfor %}
+
+                {% else %}
+
+                        <!-- Basic Home Page Template -->
+                        
+                        <h2>Events</h2>
+
+                        <!--<div class="span3 card">
+                            <h1>This is a card!</h1>
+                            <p>In essence, a card is just a rectangular region which contains content.  This content could be text, images, lists, etc... The card UI methaphor dictates the interaction and layout of these regions.</p>
+                        </div>-->
+                        {% for event in events %}
+                        <div class="span4 card">
+                            <div class="card-image" > <img src="{{event.logo.url}}">
+                                <h2><a href="{{event.url}}" target="_blank">{{event.name.text}}</a></h2>
+                            </div>
+                            <p><a href="{{event.url}}" target="_blank">{{event.name.text}}</a></p>
+                        </div>
+                        <div class="span1"></div>
+                        {% endfor %}
+                                   
+
+                        
+
+                        
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Page Container -->
+{% endblock %}

@@ -17,6 +17,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+      
+          
     <!-- Style Sheet-->
     <link rel="stylesheet" href='{% static "style.css" %}' />
     <link rel='stylesheet' id='bootstrap-css-css' href='{% static "bootstrap5152.css" %}' type='text/css' media='all' />
@@ -45,7 +47,6 @@
                 <div class="span4"></div>
             </div>
             <a href="/"><h3 class="search-header">Unwind - Plan your day out!</h3></a>
-            <h5>\uad6d\ube48\uce74\uc9c0\ub178\u3010 \uff2b\uff22\uff2c379 \uca5c\ucef4 \u3011\uc2a4\ud0c0\ubc14\uce74\ub77c</h5>
             <!-- <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p> -->
             <!--<form id="search-form" class="search-form clearfix" method="get" action="/search" autocomplete="off">
                 <div class="span7" style="float:left">
@@ -69,10 +70,12 @@
             <div class="row">
                 <div class="span12">
                     <section class="widget">
-                        <h3 class="title">How it works</h3>
+                        <h3 class="title">About Unwind</h3>
                         <div class="textwidget">
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-                            <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                            <p>
+                                This application uses Eventbrite's API to fetch events relateed the categories selected by the user
+                            </p>
+                           
                         </div>
                     </section>
                 </div>
@@ -187,16 +190,16 @@ $(document).ready(function() {
         alert($(':checked').length)
     });
 
-    $(':checkbox[name=event_categories]').change(function() {
+    $(':checkbox[name=category_id]').change(function() {
 
         //update checkCount 
         checkCount = $(':checked').length;
 
         if (checkCount >= maxChecks) {
             //alert('you may only choose up to ' + maxChecks + ' options');
-            $(':checkbox[name=event_categories]').not(':checked').attr('disabled', true);
+            $(':checkbox[name=category_id]').not(':checked').attr('disabled', true);
         } else {
-            $(':checkbox[name=event_categories]:disabled').attr('disabled', false);
+            $(':checkbox[name=category_id]:disabled').attr('disabled', false);
         }
 
     });

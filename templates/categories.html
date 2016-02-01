@@ -23,15 +23,14 @@
                               <section class="span4 articles-list">
                                 <ul class="articles">
                                     <li class="standard">                                            
-                                        <h5>{{i.name}} {{i.id}}</h5>
-                                        <input type="checkbox" name="category_id" value={{i.id}} />  
+                                        <h5>{{i.name}} <input type="checkbox" name="category_id" value={{i.id}} /></h5>  
                                     </li>
                                 </ul>
      
                               </section>  
                         {% endfor %}
                         </div>
-                        <input id="search" class="search-btn" type="submit" value="Submit" />
+                        <center><input id="search" class="btn btn-medium" type="submit" value="Submit" /></center>
                         </form>
 
 

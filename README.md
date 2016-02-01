@@ -8,7 +8,7 @@ As the name suggests, use unwind to plan out your day!
 - Make a new virtual env with python version as 3.5
 	
 	- mkvirtualenv --python=(*path to your python3.5 installation directory*) (*name of virtual enviornment*)
-	- eg : **mkvirtualenv --python=/usr/local/bin/python3.5 ir_project**
+	- eg : **mkvirtualenv --python=/usr/local/bin/python3.5 unwind**
 
 - activate the virtual environment that you have made
 
@@ -18,7 +18,7 @@ As the name suggests, use unwind to plan out your day!
 
 - install postgres database and create a new database
 
-- make a copy of local_settings.py.sample file from nongit folder and move it to lingualsearch folder
+- make a copy of local_settings.py.sample file from nongit folder and move it to unwind folder
 
 - rename this file copied file to **local_settings.py** 
 
