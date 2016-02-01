@@ -5,9 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 import pdb
-#import logging
-#import simplejson
-#import itertools
+
 
 
 def home(request):
@@ -60,11 +58,11 @@ def fetchEventbriteCategories():
 
 	return response
 
-def fetchEventbriteEvents(category_string):
+def fetchEventbriteEvents(category_string,page):
 	try:
 		#pdb.set_trace()
 		errors = []
-		request_params = urllib.parse.urlencode({'token': settings.EVENTRBRITE_TOKEN, 'categories': category_string})
+		request_params = urllib.parse.urlencode({'token': settings.EVENTRBRITE_TOKEN, 'categories': category_string, 'page' : page})
 		url = settings.EVENTBRITE_BASEURL + 'events/search/'
 		request = Request(url + '?' + request_params)
 		response = urlopen(request)
@@ -84,17 +82,25 @@ def fetchEventbriteEvents(category_string):
 def search(request):
 	try:
 		errors = []
-
+		#pdb.set_trace()
 		category_id_list = request.GET.getlist('category_id')
+		if request.GET['page_no']:
+			page_s = request.GET['page_no']
 		category_string = ', '.join(category_id_list)
 		#query_string = ', '.join(category_id_list)
-
-		data_fetched_from_api = fetchEventbriteEvents(category_string)
+		query=""
+		for ids in category_id_list:
+			query += 'category_id=' + ids + '&' 
+		query = query[:-1]
+		data_fetched_from_api = fetchEventbriteEvents(category_string,page_s)
 		
 		if data_fetched_from_api['status'] == "success":
 
 			events = data_fetched_from_api['data']['events']
 			page_count = data_fetched_from_api['data']['pagination']['page_count']
+			loop_times = range(1, page_count)
+			page_no = data_fetched_from_api['data']['pagination']['page_number']
+			next_page = int(page_no) + 1
 			
 
 		else:
@@ -102,7 +108,7 @@ def search(request):
 			raise Exception(errors)
 
 		if not errors:
-			context = { 'events' : events, 'page_count': page_count }
+			context = { 'events' : events, 'page_count': page_count, 'loop_times': loop_times, 'page_no': page_no, 'query': query, 'next_page': next_page }
 			
 		else:
 			errors.append('Error fetching API details')

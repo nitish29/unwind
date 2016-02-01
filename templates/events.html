@@ -16,11 +16,6 @@
                         <!-- Basic Home Page Template -->
                         
                         <h2>Events</h2>
-
-                        <!--<div class="span3 card">
-                            <h1>This is a card!</h1>
-                            <p>In essence, a card is just a rectangular region which contains content.  This content could be text, images, lists, etc... The card UI methaphor dictates the interaction and layout of these regions.</p>
-                        </div>-->
                         {% for event in events %}
                         <div class="span4 card">
                             <div class="card-image" > <img src="{{event.logo.url}}">
@@ -30,6 +25,20 @@
                         </div>
                         <div class="span1"></div>
                         {% endfor %}
+
+                        <div class="row" id="pagination">
+                        <div class="span12">
+                        {% for j in loop_times|slice:":10" %}
+                        
+                            <a href="?{{query}}&page_no={{j}}" class="btn {% ifequal j|slugify page_no %}active{% endifequal %}">{{j}}</a>
+
+                        {% endfor %}
+                        {% ifnotequal num_pages|slugify page_no|slugify %}
+                        <a href="?{{query}}&page_no={{next_page}}" class="btn">Next »</a>
+                        <a href="?{{query}}&page_no={{page_count}}" class="btn">Last »</a>
+                        {% endifnotequal %}
+                        </div>
+                        </div>
                                    
 
                         
