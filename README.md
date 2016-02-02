@@ -29,3 +29,38 @@ As the name suggests, use unwind to plan out your day!
 - type the following command using command line - python manage.py runserver 0:8000 
 
 - open browser and type localhost:8000, you should see the default django page
+
+#Project Directory Structure
+	
+	Unwind/
+      |--nongit/
+      |  |--local_settings.py.sample
+      |--static/
+      |  |--css/
+      |     |--materialize.css
+      |     |--materialize.min.css
+      |     |--style.css
+      |  |--font/
+      |  |--images/
+      |  |--js/
+      |     |--init.js
+      |     |--materialize.js
+      |     |--materialize.min.js
+      |
+      |--templates/
+      |  |--categories.html
+      |  |--documentation.html
+      |  |--events.html
+      |  |--index.html
+      |
+      |--unwind/
+      |  |--local_settings.py
+      |  |--settings.py
+      |  |--urls.py
+      |  |--views.py
+      |  |--wsgi.py
+      |
+      |--.gitignore
+      |--manage.py
+      |--README.md
+      |--requirements.txt

@@ -1,5 +1,4 @@
 {% extends 'index.html' %} {% block body_block %}
-<!-- Start of Page Container -->
 <div class="container">
     <div class="row">
         {% if errors %}
@@ -51,13 +50,6 @@
     <div class="row">
     <center>
         <ul class="pagination">
-            <!--<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active teal lighten-2"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>-->
             {% for j in loop_times|slice:":10" %}
             <li class="{% if j == page_no %}active teal lighten-2{%endif%} waves-effect"><a href="?{{query}}&page_no={{j}}">{{j}}</a></li>
             {% endfor %}
@@ -71,55 +63,4 @@
     </div>
     
 </div>
-<!--<div class="page-container">
-    <div class="container">
-        <div class="row">
-            
-            <div class="span12 page-content">
-
-                {% if errors %}
-                        {% for i in errors %}
-                                <h3>{{ i }}</h3>
-                        {% endfor %}
-
-                {% else %}
-
-                        
-                        
-                        <h2>Events</h2>
-                        {% for event in events %}
-                        <div class="span4 card">
-                            <div class="card-image" > <img src="{{event.logo.url}}">
-                                <h2><a href="{{event.url}}" target="_blank">{{event.name.text}}</a></h2>
-                            </div>
-                            <p><a href="{{event.url}}" target="_blank">{{event.name.text}}</a></p>
-                        </div>
-                        <div class="span1"></div>
-                        {% endfor %}
-
-                        <div class="row" id="pagination">
-                        <div class="span12">
-                        {% for j in loop_times|slice:":10" %}
-                        
-                            <a href="?{{query}}&page_no={{j}}" class="btn {% ifequal j|slugify page_no %}active{% endifequal %}">{{j}}</a>
-
-                        {% endfor %}
-                        {% ifnotequal num_pages|slugify page_no|slugify %}
-                        <a href="?{{query}}&page_no={{next_page}}" class="btn">Next »</a>
-                        <a href="?{{query}}&page_no={{page_count}}" class="btn">Last »</a>
-                        {% endifnotequal %}
-                        </div>
-                        </div>
-                                   
-
-                        
-
-                        
-                {% endif %}
-
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- End of Page Container -->
 {% endblock %}

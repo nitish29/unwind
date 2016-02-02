@@ -81,7 +81,6 @@ def fetchEventbriteEvents(category_string,page):
 def search(request):
 	try:
 		errors = []
-		#pdb.set_trace()
 		category_id_list = request.GET.getlist('category_id')
 		if request.GET['page_no']:
 			page_s = request.GET['page_no']
@@ -119,4 +118,7 @@ def search(request):
 		context = { 'errors' : errors }
 
 	return render(request, "events.html", context)
+
+def documentation(request):
+	return render(request, "documentation.html")
 
