@@ -78,14 +78,23 @@ This application makes use of **4** view **_functions_** to display data to the 
 
 - home 
 	- This function makes a call to fetchEventbriteCategories action in order to fetch a list of all the categories to be presented to the user on the home page. Once all the data is fetched, it is santized into a format that the django templating engine can understand and passed to *categories.html* template. 
+
 - events
 	- This function makes a call to the fetchEventbriteEvents action in order to get a list of all the events corresponding to categories selected by the user. The data fetched is santized and passed to *events.html* template.
+
 - fetchEventbriteCategories 
-	- This function makes a call to the Eventbrite API's **Categories** endpoint to get a _JSON_ response object.
+	- This function makes a call to the Eventbrite API's **Categories** endpoint to get a _JSON_ response object of all the categories.
 	  The query parameters passed to the endpoint are:
-	  	- categories: Value includes comma separated category ids.
 	  	- token: Personal OAuth token issued by Eventbrite.
 
 - fetchEventbriteEvents
+	- Function arguments:
+		- category_string: A comma separated string of category ids.
+		- page: The event page number to be fetched using the API endpoint. 
+
+	- This function makes a call to the Eventbrite API's **Events** endpoint to get a _JSON_ response object of all the events corresponding to requested category ids. A call to specifically this endpoint is made - **_/events/search/_**. The query parameters passed to the endpoint are:
+	  	- categories: The value for this parameter is a comma separated category id string. eg: (*categories=1,2,3*)
+	  	- token: Personal OAuth token issued by Eventbrite.
+	  	- page: The event page number to be fetched using the API endpoint.
 	 
 ---
