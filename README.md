@@ -1,7 +1,11 @@
-# unwind
+# Unwind
 As the name suggests, use unwind to plan out your day!
 
-# unwind Installation Steps
+Unwind uses **Eventbrite's API** to display different event categories to users. As of now, a user can select only upto **3** event categories. Based on the categories selected, a curated list of all the events pertaing to selected categories are displayed.
+
+---
+
+#Installation Steps
 
 - Install Virtual Env and Virtual Env wrapper
 
@@ -29,6 +33,8 @@ As the name suggests, use unwind to plan out your day!
 - type the following command using command line - python manage.py runserver 0:8000 
 
 - open browser and type localhost:8000, you should see the default django page
+
+---
 
 #Project Directory Structure
 	
@@ -64,3 +70,5 @@ As the name suggests, use unwind to plan out your day!
       |--manage.py
       |--README.md
       |--requirements.txt
+---
+
