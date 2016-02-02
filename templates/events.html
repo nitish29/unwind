@@ -38,10 +38,10 @@
             {% for j in loop_times|slice:":10" %}
             <li class="{% if j == page_no %}active teal lighten-2{%endif%} waves-effect"><a href="?{{query}}&page_no={{j}}">{{j}}</a></li>
             {% endfor %}
-            {% ifnotequal num_pages|slugify page_no %}
+            {% if page_count != page_no %}
             <a href="?{{query}}&page_no={{next_page}}" class="btn">Next »</a>
             <a href="?{{query}}&page_no={{page_count}}" class="btn">Last »</a>
-            {% endifnotequal %}
+            {% endif %}
         </ul>
         
     </center>
