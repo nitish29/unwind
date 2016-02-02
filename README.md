@@ -74,11 +74,18 @@ Unwind uses **Eventbrite's API** to display different event categories to users.
 
 ## More about views.py
 
-This application makes use of **4** view **_actions_** to display data to the user.
+This application makes use of **4** view **_functions_** to display data to the user.
 
-- #### home
-- #### events
-- #### fetchEventbriteCategories
-- #### fetchEventbriteEvents
+- home 
+	- This function makes a call to fetchEventbriteCategories action in order to fetch a list of all the categories to be presented to the user on the home page. Once all the data is fetched, it is santized into a format that the django templating engine can understand and passed to *categories.html* template. 
+- events
+	- This function makes a call to the fetchEventbriteEvents action in order to get a list of all the events corresponding to categories selected by the user. The data fetched is santized and passed to *events.html* template.
+- fetchEventbriteCategories 
+	- This function makes a call to the Eventbrite API's **Categories** endpoint to get a _JSON_ response object.
+	  The query parameters passed to the endpoint are:
+	  	- categories: Value includes comma separated category ids.
+	  	- token: Personal OAuth token issued by Eventbrite.
+
+- fetchEventbriteEvents
 	 
 ---
