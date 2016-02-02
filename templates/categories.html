@@ -1,94 +1,44 @@
-{% extends 'base.html' %} {% block body_block %}
+{% extends 'index.html' %} {% block body_block %}
 <!-- Start of Page Container -->
-<div class="page-container">
-    <div class="container">
-        <div class="row">
-            <!-- start of page content -->
-            <div class="span12 page-content">
+<div class="container">
 
-                {% if errors %}
+
+    <div class="section">
+        <div class="row">
+
+            {% if errors %}
                         {% for i in errors %}
                                 <h3>{{ i }}</h3>
                         {% endfor %}
 
                 {% else %}
 
-                        <!-- Basic Home Page Template -->
-                        
-                        <h2><center>Categories</center></h2>      
-                        <center><h3>Please select 3 categories for which you would like us to show events happening nearby!</h3></center>      
-                        <div class="row separator">
-                        <form method="get" action="/search">
-                        {% for i in categories %}
-                              <section class="span4 articles-list">
-                                <ul class="articles">
-                                    <li class="standard">                                            
-                                        <h5>{{i.name}} <input type="checkbox" name="category_id" value={{i.id}} /></h5>  
-                                    </li>
-                                </ul>
-     
-                              </section>  
-                        {% endfor %}
+        </div>
+                    <h3><center>Categories</center></h3>    
+                    <center><h5>Please select 3 categories for which you would like us to show events happening nearby!</h5></center>
+                    <form method="get" action="/search">
+                    <div class="row">
+                    {% for i in categories %}
+                      <div class="col s3">
+                        <div class="card-panel teal">
+                          <span class="white-text">{{i.name}}</span>
                         </div>
-                        <input type="hidden" name="page_no" value=1>
-                        <center><input id="search" class="btn btn-medium" type="submit" value="Submit" /></center>
-                        </form>
-
+                      </div>
+                    <div class="col s1">
+                    <p>
+                      <input type="checkbox" id="{{i.id}}" name="category_id" value={{i.id}} />
+                      <label for="{{i.id}}"></label>
+                    </p>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    <input type="hidden" name="page_no" value=1>       
+                    <center><input id="search" class="btn btn-medium" type="submit" value="Submit" /></center>
+                    </form>
 
                 {% endif %}
-
-            </div>
-            <!-- end of page content -->
-            <!-- start of sidebar -->
-            <!--<aside class="span4 page-sidebar">
-
-                                <section class="widget">
-                                        <div class="support-widget">
-                                                <h3 class="title">Support</h3>
-                                                <p class="intro">Need more support? If you did not found an answer, contact us for further help.</p>
-                                        </div>
-                                </section>
-
-                                <section class="widget">
-                                        <div class="quick-links-widget">
-                                                <h3 class="title">Quick Links</h3>
-                                                <ul id="menu-quick-links" class="menu clearfix">
-                                                        <li><a href="index-2.html">Home</a></li>
-                                                        <li><a href="articles-list.html">Articles List</a></li>
-                                                        <li><a href="faq.html">FAQs</a></li>
-                                                        <li><a href="contact.html">Contact</a></li>
-                                                </ul>
-                                        </div>
-                                </section>
-
-                                <section class="widget">
-                                        <h3 class="title">Tags</h3>
-                                        <div class="tagcloud">
-                                                <a href="#" class="btn btn-mini">basic</a>
-                                                <a href="#" class="btn btn-mini">beginner</a>
-                                                <a href="#" class="btn btn-mini">blogging</a>
-                                                <a href="#" class="btn btn-mini">colour</a>
-                                                <a href="#" class="btn btn-mini">css</a>
-                                                <a href="#" class="btn btn-mini">date</a>
-                                                <a href="#" class="btn btn-mini">design</a>
-                                                <a href="#" class="btn btn-mini">files</a>
-                                                <a href="#" class="btn btn-mini">format</a>
-                                                <a href="#" class="btn btn-mini">header</a>
-                                                <a href="#" class="btn btn-mini">images</a>
-                                                <a href="#" class="btn btn-mini">plugins</a>
-                                                <a href="#" class="btn btn-mini">setting</a>
-                                                <a href="#" class="btn btn-mini">templates</a>
-                                                <a href="#" class="btn btn-mini">theme</a>
-                                                <a href="#" class="btn btn-mini">time</a>
-                                                <a href="#" class="btn btn-mini">videos</a>
-                                                <a href="#" class="btn btn-mini">website</a>
-                                                <a href="#" class="btn btn-mini">wordpress</a>
-                                        </div>
-                                </section>
-
-                        </aside> -->
-            <!-- end of sidebar -->
-        </div>
+            
+        
     </div>
 </div>
 <!-- End of Page Container -->

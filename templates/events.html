@@ -1,9 +1,80 @@
-{% extends 'base.html' %} {% block body_block %}
+{% extends 'index.html' %} {% block body_block %}
 <!-- Start of Page Container -->
-<div class="page-container">
+<div class="container">
+    <div class="row">
+        {% if errors %}
+                {% for i in errors %}
+                        <h3>{{ i }}</h3>
+                {% endfor %}
+
+        {% else %}
+            
+            <h3><center>Events</center></h3>
+            {% for event in events %}
+            <div class="col s6">
+              <div class="card small">
+                <div class="card-image">
+                  <img src="{{event.logo.url}}">
+                  
+                </div>
+                <div class="card-content">
+                  <p>{{event.name.text}}</p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">{{event.name.text}}<i class="material-icons right">close</i></span>
+                  <p>{{event.description.text}}</p>
+                </div>
+                <div class="card-action">
+                  <a href="{{event.url}}" target="_blank">View event on Eventbrite</a>
+                </div>
+              </div>
+            </div>
+            <!--<div class="col s6">
+            <div class="card medium">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="{{event.logo.url}}">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">{{event.name.text}}<i class="material-icons right">more_vert</i></span>
+                  <p><a href="#">More...</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">{{event.name.text}}<i class="material-icons right">close</i></span>
+                  <p>{{event.description.text}}</p>
+                </div>
+            </div>
+            </div>-->
+            {% endfor %}
+
+         {% endif %}
+    </div>
+    <div class="row">
+    <center>
+        <ul class="pagination">
+            <!--<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active teal lighten-2"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>-->
+            {% for j in loop_times|slice:":10" %}
+            <li class="{% if j == page_no %}active teal lighten-2{%endif%} waves-effect"><a href="?{{query}}&page_no={{j}}">{{j}}</a></li>
+            {% endfor %}
+            {% ifnotequal num_pages|slugify page_no %}
+            <a href="?{{query}}&page_no={{next_page}}" class="btn">Next »</a>
+            <a href="?{{query}}&page_no={{page_count}}" class="btn">Last »</a>
+            {% endifnotequal %}
+        </ul>
+        
+    </center>
+    </div>
+    
+</div>
+<!--<div class="page-container">
     <div class="container">
         <div class="row">
-            <!-- start of page content -->
+            
             <div class="span12 page-content">
 
                 {% if errors %}
@@ -13,7 +84,7 @@
 
                 {% else %}
 
-                        <!-- Basic Home Page Template -->
+                        
                         
                         <h2>Events</h2>
                         {% for event in events %}
@@ -49,6 +120,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- End of Page Container -->
 {% endblock %}

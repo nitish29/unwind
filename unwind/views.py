@@ -28,7 +28,6 @@ def home(request):
 			
 		else:
 			errors.append('Error fetching API details')
-			#response = HttpResponse(json.dumps({'status': 'failure','message': errors}), content_type="application/json")
 			raise Exception(errors)
 
 	except:
@@ -87,7 +86,6 @@ def search(request):
 		if request.GET['page_no']:
 			page_s = request.GET['page_no']
 		category_string = ', '.join(category_id_list)
-		#query_string = ', '.join(category_id_list)
 		query=""
 		for ids in category_id_list:
 			query += 'category_id=' + ids + '&' 
@@ -98,7 +96,7 @@ def search(request):
 
 			events = data_fetched_from_api['data']['events']
 			page_count = data_fetched_from_api['data']['pagination']['page_count']
-			loop_times = range(1, page_count)
+			loop_times = range(1, page_count+1)
 			page_no = data_fetched_from_api['data']['pagination']['page_number']
 			next_page = int(page_no) + 1
 			
@@ -121,4 +119,4 @@ def search(request):
 		context = { 'errors' : errors }
 
 	return render(request, "events.html", context)
-	#https://www.eventbriteapi.com/v3/events/?categories=113,107&token=5U4JRY2Q6QYB4HZMNS3K&price=free
+
