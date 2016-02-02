@@ -5,7 +5,7 @@ Unwind uses **Eventbrite's API** to display different event categories to users.
 
 ---
 
-#Installation Steps
+## Installation Steps
 
 - Install Virtual Env and Virtual Env wrapper
 
@@ -36,7 +36,7 @@ Unwind uses **Eventbrite's API** to display different event categories to users.
 
 ---
 
-#Project Directory Structure
+## Project Directory Structure
 	
 	Unwind/
       |--nongit/
@@ -72,3 +72,13 @@ Unwind uses **Eventbrite's API** to display different event categories to users.
       |--requirements.txt
 ---
 
+## More about views.py
+
+This application makes use of **4** view **_actions_** to display data to the user.
+1. ##### home
+	- Test
+2. ##### events
+3. ##### fetchEventbriteCategories
+4. ##### fetchEventbriteEvents
+	 
+---

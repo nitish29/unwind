@@ -20,6 +20,6 @@ from unwind import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'^search$', views.search, name='search'),
+    url(r'^events$', views.events, name='events'),
 
 ]
