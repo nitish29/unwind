@@ -76,7 +76,6 @@ Unwind uses **Eventbrite's API** to display different event categories to users.
 
 This application makes use of **4** view **_actions_** to display data to the user.
 1. ##### home
-	- Test
 2. ##### events
 3. ##### fetchEventbriteCategories
 4. ##### fetchEventbriteEvents
