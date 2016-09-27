@@ -3,7 +3,7 @@ As the name suggests, use unwind to plan out your day!
 
 Unwind uses **Eventbrite's API** to display different event categories to users. As of now, a user can select only upto **3** event categories. Based on the categories selected, a curated list of all the events pertaining to the selected categories are displayed.
 
-**Demo Link - ** http://52.34.17.82/
+**Demo Link:** http://52.34.17.82/
 
 ---
 
